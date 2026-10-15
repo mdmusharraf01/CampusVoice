@@ -1,0 +1,51 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.category-btn {
+    padding: 8px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+    border-color: #a5b4fc;
+    color: #4f46e5;
+}
+
+.category-btn.active {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+    color: #ffffff;
+}
+
+input,
+textarea,
+select {
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 1px;
+}
+
+button {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+@media (max-width: 480px) {
+    header button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}

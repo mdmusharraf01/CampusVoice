@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT Campus Voice</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+
+    <!-- Header -->
+    <header class="border-b border-slate-200 bg-white">
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+            <div>
+                <h1 id="headerTitle" class="text-2xl font-bold tracking-tight text-indigo-600">
+                    Campus Voice
+                </h1>
+                <p id="headerSubtitle" class="mt-1 text-sm text-slate-500">
+                    One campus. One voice.
+                </p>
+            </div>
+
+            <button id="openFormBtn"
+                class="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">
+                + New Announcement
+            </button>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-6 py-10">
+
+        <!-- Hero -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+                What's happening on campus?
+            </h2>
+            <p class="mt-3 text-base leading-7 text-slate-600">
+                Stay updated with the latest announcements.
+            </p>
+        </section>
+
+        <!-- Dashboard Stats -->
+        <section class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-sm text-slate-500">Total Announcements</p>
+                <p id="totalCount" class="mt-2 text-3xl font-bold text-indigo-600">0</p>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-sm text-slate-500">Academic</p>
+                <p id="academicCount" class="mt-2 text-3xl font-bold">0</p>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-sm text-slate-500">Events</p>
+                <p id="eventCount" class="mt-2 text-3xl font-bold">0</p>
+            </div>
+        </section>
+
+        <!-- Create Announcement Form -->
+        <section id="announcementFormSection"
+            class="mb-8 hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <h3 class="mb-5 text-xl font-bold">Create Announcement</h3>
+
+            <form id="announcementForm" class="space-y-4">
+                <div>
+                    <label for="announcementTitle"
+                        class="mb-1 block text-sm font-medium">Announcement Title</label>
+                    <input id="announcementTitle" type="text" required maxlength="100"
+                        placeholder="e.g. Internal Assessment Schedule"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3">
+                </div>
+
+                <div>
+                    <label for="announcementCategory"
+                        class="mb-1 block text-sm font-medium">Category</label>
+                    <select id="announcementCategory" required
+                        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3">
+                        <option value="Academic">Academic</option>
+                        <option value="Events">Events</option>
+                        <option value="Placement">Placement</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="announcementDescription"
+                        class="mb-1 block text-sm font-medium">Description</label>
+                    <textarea id="announcementDescription" required maxlength="1000" rows="4"
+                        placeholder="Write announcement details..."
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3"></textarea>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <button type="submit"
+                        class="rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-white hover:bg-indigo-700">
+                        Publish Announcement
+                    </button>
+
+                    <button type="button" id="cancelFormBtn"
+                        class="rounded-lg border border-slate-300 px-5 py-2.5 font-semibold hover:bg-slate-50">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Search -->
+        <section class="mb-5">
+            <label for="searchInput" class="mb-2 block text-sm font-medium">
+                Search Announcements
+            </label>
+            <input id="searchInput" type="search"
+                placeholder="Search by title or description..."
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3">
+        </section>
+
+        <!-- Category Filters -->
+        <section class="mb-8">
+            <div class="flex flex-wrap gap-3">
+                <button class="category-btn active" data-category="All">All</button>
+                <button class="category-btn" data-category="Academic">Academic</button>
+                <button class="category-btn" data-category="Events">Events</button>
+                <button class="category-btn" data-category="Placement">Placement</button>
+            </div>
+        </section>
+
+        <!-- Announcement List -->
+        <section>
+            <div class="mb-5 flex items-center justify-between gap-3">
+                <h3 class="text-xl font-bold">Latest Announcements</h3>
+                <span id="resultCount" class="text-sm text-slate-500"></span>
+            </div>
+
+            <div id="announcementList" class="grid gap-5">
+                <!-- JavaScript adds announcements here -->
+            </div>
+
+            <p id="emptyMessage"
+                class="hidden rounded-xl border border-dashed border-slate-300 p-8 text-center text-slate-500">
+                No announcements found.
+            </p>
+        </section>
+
+        <!-- Header Customization -->
+        <section class="mt-12 rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="mb-5 text-xl font-bold">Customize Header</h3>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="titleInput" class="mb-2 block text-sm font-medium">
+                        Header Title
+                    </label>
+                    <input id="titleInput" type="text" maxlength="80"
+                        placeholder="Enter header title"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3">
+                </div>
+
+                <div>
+                    <label for="subtitleInput" class="mb-2 block text-sm font-medium">
+                        Header Subtitle
+                    </label>
+                    <input id="subtitleInput" type="text" maxlength="150"
+                        placeholder="Enter header subtitle"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3">
+                </div>
+
+                <button id="resetHeaderBtn" type="button"
+                    class="rounded-lg border border-slate-300 px-4 py-2 font-medium hover:bg-slate-50">
+                    Reset Header
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-8 border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
+        AIT Campus Voice · Stay informed, stay connected.
+    </footer>
+
+</body>
+</html>
